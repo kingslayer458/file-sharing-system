@@ -8,7 +8,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px; /* Add some padding on the sides for better readability */
+    padding: 0 15px; 
 }
 
 .re {
@@ -18,7 +18,7 @@ body {
     text-align: center;
 }
 
-/* Header styles */
+
 header {
     background-color: #333;
     color: white;
@@ -26,7 +26,7 @@ header {
     text-align: right;
 }
 
-/* Navigation styles */
+
 nav {
     padding: 1rem;
 }
@@ -36,7 +36,7 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* Center the navigation items */
+    justify-content: center; 
 }
 
 nav ul li {
@@ -79,15 +79,15 @@ nav a:active {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    padding: 70px; /* Reduced padding */
+    padding: 70px;
     margin-bottom: 35px;
     text-align: center;
-    width: 90%; /* Set width to 90% */
-    max-width: 600px; /* Add max-width for responsiveness */
-    margin: 0 auto; /* Center align */
+    width: 90%; 
+    max-width: 600px; 
+    margin: 0 auto; 
 }
 
-/* File input styles */
+
 .custom-file-label {
     background-color: #f8f9fa;
     padding: 10px;
@@ -131,19 +131,56 @@ button:hover {
     text-decoration: underline;
 }
 
-/* Media queries for responsiveness */
+
 @media screen and (max-width: 768px) {
     .types,
     .upload-section,
     .file-list-section {
-        width: 90%; /* Adjust width for smaller screens */
-    }
+        width: 90%; 
 }
 
 @media screen and (max-width: 480px) {
     .types,
     .upload-section,
     .file-list-section {
-        width: 100%; /* Adjust width for even smaller screens */
+        width: 100%; 
     }
 }
+}
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333333;
+    transition: opacity 3s, visibility 4s;
+  }
+  
+  .loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-top-color: #009578;
+    border-radius: 50%;
+    animation: loading 5s ease infinite;
+  }
+  
+  @keyframes loading {
+    from {
+      transform: rotate(0turn);
+    }
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  

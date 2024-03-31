@@ -8,15 +8,17 @@
    
 </head>
 <body>
+    <div class="loader"></div>
+    <div class="progress">
+        <div class="color"></div>
+      </div>
    
 
         <h1 class="re">Online File Sharing 
           
         </h1>
       
-      
-        
-        
+
   
     <main>
         <nav class="manojre">
@@ -127,12 +129,28 @@
         } else {
             shareableLink.textContent = "Please upload a file to share.";
         }
+   
     });
+
+
+   
+
     
+    </script>
+    <script>
+        window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+  
+    loader.classList.add("loader--hidden");
+  
+    loader.addEventListener("transitionend", () => {
+      document.body.removeChild(loader);
+    });
+  });
     </script>
     
 
-
+   
 
     
 </body>
