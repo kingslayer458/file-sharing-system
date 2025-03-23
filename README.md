@@ -1,3 +1,3 @@
 # file-sharing-system
 
-api is not working will fix it soon!!
+file.io api is not working  due to cors issue so for now use tmpfile.org api
