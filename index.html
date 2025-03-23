@@ -1,157 +1,361 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>file demo</title>
-    <link rel="stylesheet" href="style.css">
-   
-</head>
-<body>
-    <div class="loader"></div>
-    <div class="progress">
-        <div class="color"></div>
-      </div>
-   
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #333;
+    --header-bg: #333;
+    --header-text: #fff;
+    --card-bg: #fff;
+    --card-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    --button-bg: #109720;
+    --button-hover: #0a7518;
+    --button-text: #fff;
+    --nav-bg: #333;
+    --nav-text: #fff;
+    --nav-hover: #ccc;
+    --link-bg: #25a734;
+    --link-text: #fff;
+    --progress-bg: #f0f0f0;
+    --progress-color: #109720;
+    --loader-bg: #333;
+    --loader-border: #dddddd;
+    --loader-accent: #009578;
+}
 
-        <h1 class="re">Online File Sharing 
-          
-        </h1>
-      
+.dark-theme {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --header-bg: #1e1e1e;
+    --header-text: #fff;
+    --card-bg: #1e1e1e;
+    --card-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1);
+    --button-bg: #109720;
+    --button-hover: #0a7518;
+    --button-text: #fff;
+    --nav-bg: #1e1e1e;
+    --nav-text: #fff;
+    --nav-hover: #aaa;
+    --link-bg: #25a734;
+    --link-text: #fff;
+    --progress-bg: #333;
+    --progress-color: #109720;
+    --loader-bg: #1e1e1e;
+    --loader-border: #333;
+    --loader-accent: #109720;
+}
 
-  
-    <main>
-        <nav class="manojre">
-            <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#signin">Sign In</a></li>
-                <li><a href="#signup">Sign Up</a></li>
-            </ul>
-        </nav>
-     
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        <section class="types">
-            <h2><span>types supported</span></h2>
-            
-                <li>
-                Documents: Such as PDFs, Microsoft Word documents (DOCX), text files (TXT), spreadsheets (XLSX), presentations (PPTX), and other office formats.
-               
-              Images: Common image formats such as JPEG, PNG, GIF, BMP, TIFF, and SVG.
-               Audio: Including MP3, WAV, FLAC, AAC, and other audio formats.
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
 
-              Video: Common video formats like MP4, AVI, MOV, MKV, and WMV.
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
 
-              Archives: Compressed files such as ZIP, RAR, 7Z, TAR, and GZ.
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-                </li>
-                
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.site-title {
+    margin: 0;
+    font-size: 1.5rem;
+}
 
-          
-            
-                
-        
-        </section>
-        
-        <section class="upload-section">
-            <h2>Upload Files</h2>
-           
-            <form id="file-upload-form" enctype="multipart/form-data">
-                <label class="custom-file-label" for="fileInput">click here</label>
-                <input type="file" id="fileInput" name="file" required multiple>
-                <button id="uploadButton" type="button">Share</button>
-            </form>
-        </section>
-        <section class="file-list-section">
-            <h2>Uploaded Files</h2>
-            <div id="shareableLink"></div>
-        </section>
-    </main>
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--header-text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
 
-    <script>
-        
+#theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-    const fileInput = document.getElementById("fileInput");
-    const uploadButton = document.getElementById("uploadButton");
-    const shareableLink = document.getElementById("shareableLink");
+#theme-toggle .fa-sun {
+    display: none;
+}
 
-   
-    fileInput.addEventListener("change", () => {
-        const selectedFiles = fileInput.files;
-        if (selectedFiles.length > 0) {
-            const filenames = Array.from(selectedFiles)
-                .map((file) => file.name)
-                .join(", ");
-            const label = document.querySelector(".custom-file-label");
-            label.innerHTML = filenames;
-        }
-    });
+.dark-theme #theme-toggle .fa-moon {
+    display: none;
+}
 
+.dark-theme #theme-toggle .fa-sun {
+    display: inline;
+}
 
+.main-nav {
+    margin: 1.5rem 0;
+}
 
-    uploadButton.addEventListener("click", async () => {
-        const files = fileInput.files;
-        if (files.length > 0) {
-            try {
-                const formData = new FormData();
-                Array.from(files).forEach(file => {
-                    formData.append("file", file);
-                });
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
 
-             
-                uploadButton.disabled = true;
-                uploadButton.textContent = "Sharing...";
+.main-nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--nav-text);
+    background-color: var(--nav-bg);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
 
-                const response = await fetch("https://file.io/?expires=1d", {
-                    method: "POST",
-                    body: formData,
-                });
+.main-nav a:hover {
+    color: var(--nav-hover);
+    transform: translateY(-2px);
+}
 
-                const data = await response.json();
-                console.log(data);
+section {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
 
-                if (response.ok) {
-                    const link = `<p>Download File👉 <a href="${data.link}" target="_blank">${data.link}</a></p>`;
-                    shareableLink.innerHTML = link;
-                } else {
-                    shareableLink.innerHTML = "File share failed. Please try again";
-                }
-            } catch (error) {
-                shareableLink.textContent = "An error occurred. Please try again later.";
-                console.error("Error sharing file:", error);
-            } finally {
-                
-                uploadButton.disabled = false;
-                uploadButton.textContent = "Share";
-            }
-        } else {
-            shareableLink.textContent = "Please upload a file to share.";
-        }
-   
-    });
+.types h2, .upload-section h2, .file-list-section h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+}
 
+.types h2::after, .upload-section h2::after, .file-list-section h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--button-bg);
+    margin: 0.5rem auto;
+}
 
-   
+.types ul {
+    padding-left: 1.5rem;
+}
 
+.types li {
+    margin-bottom: 1rem;
+}
+
+.custom-file-label {
+    background-color: var(--bg-color);
+    padding: 0.75rem 1.5rem;
+    border: 2px dashed var(--button-bg);
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.custom-file-label:hover {
+    background-color: rgba(16, 151, 32, 0.1);
+}
+
+#fileInput {
+    display: none;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+#uploadProgress {
+    display: none;
+    position: relative;
+    height: 10px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--progress-bg);
+    margin: 1rem 0;
+}
+
+.color {
+    position: absolute;
+    height: 10px;
+    width: 0%;
+    border-radius: 5px;
+    background-color: var(--progress-color);
+    transition: width 0.5s ease;
+}
+
+.status {
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+#shareableLink {
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--link-bg);
+    color: var(--link-text);
+    margin-top: 1rem;
+    word-break: break-all;
+}
+
+#shareableLink a {
+    color: var(--link-text);
+    text-decoration: underline;
+}
+
+#shareableLink a:hover {
+    text-decoration: none;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--loader-bg);
+    z-index: 9999;
+    transition: opacity 0.8s, visibility 0.8s;
+}
+
+.loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader::after {
+    content: "";
+    width: 60px;
+    height: 60px;
+    border: 10px solid var(--loader-border);
+    border-top-color: var(--loader-accent);
+    border-radius: 50%;
+    animation: loading 1s ease infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+#file-upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsive styles */
+@media screen and (min-width: 768px) {
+    .site-title {
+        font-size: 2rem;
+    }
     
-    </script>
-    <script>
-        window.addEventListener("load", () => {
-    const loader = document.querySelector(".loader");
-  
-    loader.classList.add("loader--hidden");
-  
-    loader.addEventListener("transitionend", () => {
-      document.body.removeChild(loader);
-    });
-  });
-    </script>
-    
+    section {
+        padding: 3rem;
+    }
+}
 
-   
-
+@media screen and (max-width: 767px) {
+    .main-nav ul {
+        flex-direction: row;
+        justify-content: center;
+    }
     
-</body>
-</html>
+    .main-nav li {
+        margin: 0.25rem;
+    }
+    
+    section {
+        padding: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .site-title {
+        font-size: 1.25rem;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .main-nav a {
+        width: 100%;
+        text-align: center;
+    }
+    
+    section {
+        padding: 1rem;
+    }
+    
+    .custom-file-label {
+        width: 100%;
+        text-align: center;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
