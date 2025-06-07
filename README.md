@@ -41,7 +41,7 @@ Simply open the provided URL in the response to download the file.
 
 ## Notes
 - The `file.io` API was replaced with `tmpfile.org` due to CORS issues.
-- This system is designed for temporary file sharing and **not for permanent storage**.
+- This system is designed for temporary file sharing and **not for permanent storage**
 
 
 
